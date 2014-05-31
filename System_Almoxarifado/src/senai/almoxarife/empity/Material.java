@@ -1,7 +1,14 @@
 package senai.almoxarife.empity;
 
-public class Material {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Material {
+	
+	@Id
+	@GeneratedValue
 	private Long idMaterial;
 	private String nome;
 	private String unidade;

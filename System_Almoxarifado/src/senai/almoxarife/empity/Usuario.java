@@ -10,7 +10,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Usuario {
 	
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long idUsuario;
 	private String telefone;
 	private String nome;
@@ -21,6 +22,7 @@ public class Usuario {
 	
 	@OneToMany
 	private Collection<Setor> setores;
+	
 	
 	public Long getIdUsuario() {
 		return idUsuario;

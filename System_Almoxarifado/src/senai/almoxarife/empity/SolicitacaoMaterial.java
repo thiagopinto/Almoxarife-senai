@@ -1,10 +1,25 @@
 package senai.almoxarife.empity;
 
+import java.util.Collection;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class SolicitacaoMaterial {
 	
+	@Id
+	@GeneratedValue
 	private int quantidade;
-	private Long idSolicitacao;
-	private Long idMaterial;
+	
+	@OneToOne
+	private Collection<Solicitacao> solicitacao;
+	
+	@OneToMany
+	private Collection<Material> materiais;
 	
 	
 	public int getQuantidade() {
@@ -13,18 +28,21 @@ public class SolicitacaoMaterial {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-	public Long getIdSolicitacao() {
-		return idSolicitacao;
+	
+	public Collection<Solicitacao> getSolicitacao() {
+		return solicitacao;
 	}
-	public void setIdSolicitacao(Long idSolicitacao) {
-		this.idSolicitacao = idSolicitacao;
+	public void setSolicitacao(Collection<Solicitacao> solicitacao) {
+		this.solicitacao = solicitacao;
 	}
-	public Long getIdMaterial() {
-		return idMaterial;
+	public Collection<Material> getMateriais() {
+		return materiais;
 	}
-	public void setIdMaterial(Long idMaterial) {
-		this.idMaterial = idMaterial;
+	public void setMateriais(Collection<Material> materiais) {
+		this.materiais = materiais;
 	}
+	
+	
 	
 	
 

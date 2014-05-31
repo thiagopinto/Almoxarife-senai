@@ -2,13 +2,24 @@ package senai.almoxarife.empity;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class EntradaSaida {
 	
+	@Id
+	@GeneratedValue
 	private Long idEntradaSaida;
 	private int quantidade;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataInOu;
 	private int estadoEntradaSaida;
-	private Long idAlmoxarifado;
+	
 	
 	public Long getIdEntradaSaida() {
 		return idEntradaSaida;
@@ -34,12 +45,7 @@ public class EntradaSaida {
 	public void setEstadoEntradaSaida(int estadoEntradaSaida) {
 		this.estadoEntradaSaida = estadoEntradaSaida;
 	}
-	public Long getIdAlmoxarifado() {
-		return idAlmoxarifado;
-	}
-	public void setIdAlmoxarifado(Long idAlmoxarifado) {
-		this.idAlmoxarifado = idAlmoxarifado;
-	}
+	
 	
 	
 }

@@ -1,14 +1,34 @@
 package senai.almoxarife.empity;
 
 import java.sql.Date;
+import java.util.Collection;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class Solicitacao {
 	
+	@Id
+	@GeneratedValue
 	private Long idSolicitacao;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataSoli;
+	
 	private String statusSol;
-	private Long idAlmoxarifado;
-	private Long idUsuario;
+	
+	@OneToMany
+	private Collection<Almoxarifado> almoxarifados;
+	
+	@ManyToOne
+	private Usuario usuario;
+	
 	
 	public Long getIdSolicitacao() {
 		return idSolicitacao;
@@ -28,18 +48,20 @@ public class Solicitacao {
 	public void setStatusSol(String statusSol) {
 		this.statusSol = statusSol;
 	}
-	public Long getIdAlmoxarifado() {
-		return idAlmoxarifado;
+	
+	public Collection<Almoxarifado> getAlmoxarifados() {
+		return almoxarifados;
 	}
-	public void setIdAlmoxarifado(Long idAlmoxarifado) {
-		this.idAlmoxarifado = idAlmoxarifado;
+	public void setAlmoxarifados(Collection<Almoxarifado> almoxarifados) {
+		this.almoxarifados = almoxarifados;
 	}
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	
+
 }

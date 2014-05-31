@@ -1,15 +1,23 @@
 package senai.almoxarife.empity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Almoxarifado {
 	
-	private int idAlmoxarifado;
+	@Id
+	@GeneratedValue
+	private Long idAlmoxarifado;
 	private String nome;
 	
 	
-	public int getIdAlmoxarifado() {
+
+	public Long getIdAlmoxarifado() {
 		return idAlmoxarifado;
 	}
-	public void setIdAlmoxarifado(int idAlmoxarifado) {
+	public void setIdAlmoxarifado(Long idAlmoxarifado) {
 		this.idAlmoxarifado = idAlmoxarifado;
 	}
 	public String getNome() {
