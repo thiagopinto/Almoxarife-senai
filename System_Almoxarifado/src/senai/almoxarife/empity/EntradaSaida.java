@@ -7,8 +7,9 @@ public class EntradaSaida {
 	private Long idEntradaSaida;
 	private int quantidade;
 	private Date dataInOu;
-	private int estado;
-	private int idAlmoxarifado;
+	private int estadoEntradaSaida;
+	private Long idAlmoxarifado;
+	
 	public Long getIdEntradaSaida() {
 		return idEntradaSaida;
 	}
@@ -27,18 +28,18 @@ public class EntradaSaida {
 	public void setDataInOu(Date dataInOu) {
 		this.dataInOu = dataInOu;
 	}
-	public int getEstado() {
-		return estado;
+	public int getEstadoEntradaSaida() {
+		return estadoEntradaSaida;
 	}
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void setEstadoEntradaSaida(int estadoEntradaSaida) {
+		this.estadoEntradaSaida = estadoEntradaSaida;
 	}
-	public int getIdAlmoxarifado() {
+	public Long getIdAlmoxarifado() {
 		return idAlmoxarifado;
 	}
-	public void setIdAlmoxarifado(int idAlmoxarifado) {
+	public void setIdAlmoxarifado(Long idAlmoxarifado) {
 		this.idAlmoxarifado = idAlmoxarifado;
 	}
 	
-
+	
 }
