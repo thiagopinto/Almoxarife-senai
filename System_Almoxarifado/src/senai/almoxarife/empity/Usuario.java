@@ -1,7 +1,16 @@
 package senai.almoxarife.empity;
 
-public class Usuario {
+import java.util.Collection;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Usuario {
+	
+	@Id @GeneratedValue
 	private Long idUsuario;
 	private String telefone;
 	private String nome;
@@ -9,7 +18,9 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private int nivel;
-	private Long idSetor;
+	
+	@OneToMany
+	private Collection<Setor> setores;
 	
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -53,12 +64,13 @@ public class Usuario {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
-	public Long getIdSetor() {
-		return idSetor;
+	public Collection<Setor> getSetores() {
+		return setores;
 	}
-	public void setIdSetor(Long idSetor) {
-		this.idSetor = idSetor;
+	public void setSetores(Collection<Setor> setores) {
+		this.setores = setores;
 	}
+
 	
 
 }

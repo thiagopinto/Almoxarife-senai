@@ -1,9 +1,12 @@
 package senai.almoxarife.empity;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
 
 
 @Entity
@@ -13,8 +16,8 @@ public class Setor {
 	private Long idSetor;
 	private String nome;
 	
-	@OneToOne
-	private Almoxarifado almoxerifado;
+	@OneToMany
+	private Collection<Almoxarifado> almoxerifados;
 		
 	
 	public Long getIdSetor() {
@@ -29,12 +32,13 @@ public class Setor {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Almoxarifado getAlmoxerifado() {
-		return almoxerifado;
+	public Collection<Almoxarifado> getAlmoxerifados() {
+		return almoxerifados;
 	}
-	public void setAlmoxerifado(Almoxarifado almoxerifado) {
-		this.almoxerifado = almoxerifado;
+	public void setAlmoxerifados(Collection<Almoxarifado> almoxerifados) {
+		this.almoxerifados = almoxerifados;
 	}
+
 	
 	
 
