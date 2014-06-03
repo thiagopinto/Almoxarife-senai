@@ -27,6 +27,9 @@ public class Main {
 		manager.persist(m);
 		
 		manager.getTransaction().commit();
+		
+		manager.close();
+		factory.close();
 	}
 
 }

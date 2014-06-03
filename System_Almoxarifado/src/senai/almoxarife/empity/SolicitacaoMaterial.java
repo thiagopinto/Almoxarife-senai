@@ -16,7 +16,7 @@ public class SolicitacaoMaterial {
 	private int quantidade;
 	
 	@OneToOne
-	private Collection<Solicitacao> solicitacao;
+	private Solicitacao solicitacao;
 	
 	@OneToMany
 	private Collection<Material> materiais;
@@ -29,10 +29,11 @@ public class SolicitacaoMaterial {
 		this.quantidade = quantidade;
 	}
 	
-	public Collection<Solicitacao> getSolicitacao() {
+
+	public Solicitacao getSolicitacao() {
 		return solicitacao;
 	}
-	public void setSolicitacao(Collection<Solicitacao> solicitacao) {
+	public void setSolicitacao(Solicitacao solicitacao) {
 		this.solicitacao = solicitacao;
 	}
 	public Collection<Material> getMateriais() {
