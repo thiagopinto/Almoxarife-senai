@@ -1,6 +1,7 @@
 package senai.almoxarife.empity;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class EntradaSaida {
 	private int quantidade;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataInOu;
+	private Calendar dataInOu;
 	private int estadoEntradaSaida;
 	
 	
@@ -33,10 +34,11 @@ public class EntradaSaida {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-	public Date getDataInOu() {
+	
+	public Calendar getDataInOu() {
 		return dataInOu;
 	}
-	public void setDataInOu(Date dataInOu) {
+	public void setDataInOu(Calendar dataInOu) {
 		this.dataInOu = dataInOu;
 	}
 	public int getEstadoEntradaSaida() {

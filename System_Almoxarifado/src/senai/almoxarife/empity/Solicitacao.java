@@ -1,6 +1,7 @@
 package senai.almoxarife.empity;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Solicitacao {
 	private Long idSolicitacao;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataSoli;
+	private Calendar dataSoli;
 	
 	private String statusSol;
 	
@@ -36,10 +37,11 @@ public class Solicitacao {
 	public void setIdSolicitacao(Long idSolicitacao) {
 		this.idSolicitacao = idSolicitacao;
 	}
-	public Date getDataSoli() {
+	
+	public Calendar getDataSoli() {
 		return dataSoli;
 	}
-	public void setDataSoli(Date dataSoli) {
+	public void setDataSoli(Calendar dataSoli) {
 		this.dataSoli = dataSoli;
 	}
 	public String getStatusSol() {
