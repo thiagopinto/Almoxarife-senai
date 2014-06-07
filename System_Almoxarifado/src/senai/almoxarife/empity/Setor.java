@@ -35,8 +35,8 @@ public class Setor {
 	public Collection<Almoxarifado> getAlmoxerifados() {
 		return almoxerifados;
 	}
-	public void setAlmoxerifados(Collection<Almoxarifado> almoxerifados) {
-		this.almoxerifados = almoxerifados;
+	public void setAlmoxerifados(Almoxarifado almoxerifados) {
+		this.almoxerifados.add(almoxerifados);
 	}
 
 	

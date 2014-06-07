@@ -39,8 +39,8 @@ public class SolicitacaoMaterial {
 	public Collection<Material> getMateriais() {
 		return materiais;
 	}
-	public void setMateriais(Collection<Material> materiais) {
-		this.materiais = materiais;
+	public void setMateriais(Material materiais) {
+		this.materiais.add(materiais);
 	}
 	
 	

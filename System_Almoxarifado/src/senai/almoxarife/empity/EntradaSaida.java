@@ -62,8 +62,8 @@ public class EntradaSaida {
 		return itens;
 	}
 
-	public void setItens(Collection<ItemEntradaSaida> itens) {
-		this.itens = itens;
+	public void setItens(ItemEntradaSaida itens) {
+		this.itens.add(itens);
 	}
 
 	public Calendar getDataInOu() {

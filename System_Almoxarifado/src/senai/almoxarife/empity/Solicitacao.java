@@ -54,8 +54,8 @@ public class Solicitacao {
 	public Collection<Almoxarifado> getAlmoxarifados() {
 		return almoxarifados;
 	}
-	public void setAlmoxarifados(Collection<Almoxarifado> almoxarifados) {
-		this.almoxarifados = almoxarifados;
+	public void setAlmoxarifados(Almoxarifado almoxarifados) {
+		this.almoxarifados.add(almoxarifados);
 	}
 	public Usuario getUsuario() {
 		return usuario;
