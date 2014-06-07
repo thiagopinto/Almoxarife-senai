@@ -12,6 +12,7 @@ public class Material {
 	private Long idMaterial;
 	private String nome;
 	private String unidade;
+	private String descricao;
 	private int estoqueMax;
 	private int estoqueMin;
 	
@@ -32,6 +33,13 @@ public class Material {
 	}
 	public void setUnidade(String unidade) {
 		this.unidade = unidade;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public int getEstoqueMax() {
 		return estoqueMax;
