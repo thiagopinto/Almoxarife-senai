@@ -22,6 +22,9 @@ public class EntradaSaida {
 	@ManyToOne
 	private Usuario responsavel;
 	
+	@ManyToOne
+	private Almoxarifado almoxarifado;
+	
 	@OneToMany
 	private Collection<ItemEntradaSaida> itens;
 	
@@ -45,6 +48,14 @@ public class EntradaSaida {
 
 	public void setResponsavel(Usuario responsavel) {
 		this.responsavel = responsavel;
+	}	
+
+	public Almoxarifado getAlmoxarifado() {
+		return almoxarifado;
+	}
+
+	public void setAlmoxarifado(Almoxarifado almoxarifado) {
+		this.almoxarifado = almoxarifado;
 	}
 
 	public Collection<ItemEntradaSaida> getItens() {
