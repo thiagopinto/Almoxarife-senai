@@ -1,5 +1,6 @@
 package senai.almoxarife.empity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -22,6 +23,10 @@ public class Usuario {
 	
 	@OneToMany
 	private Collection<Setor> setores;
+	
+	public Usuario() {
+		setores = new ArrayList<Setor>();
+	}
 	
 	
 	public Long getIdUsuario() {
