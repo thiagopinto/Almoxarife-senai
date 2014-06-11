@@ -1,5 +1,6 @@
 package senai.almoxarife.empity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -21,6 +22,9 @@ public class SolicitacaoMaterial {
 	@OneToMany
 	private Collection<Material> materiais;
 	
+	public SolicitacaoMaterial() {
+		materiais = new ArrayList<Material>();
+	}
 	
 	public int getQuantidade() {
 		return quantidade;

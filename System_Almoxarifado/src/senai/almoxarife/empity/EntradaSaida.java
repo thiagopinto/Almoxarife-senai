@@ -1,6 +1,7 @@
 package senai.almoxarife.empity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -33,6 +34,9 @@ public class EntradaSaida {
 	
 	private boolean tipo;
 	
+	 public EntradaSaida() {
+		itens = new ArrayList<ItemEntradaSaida>();
+	}
 
 	public Long getIdEntradaSaida() {
 		return idEntradaSaida;

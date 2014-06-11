@@ -1,6 +1,7 @@
 package senai.almoxarife.empity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -29,6 +30,10 @@ public class Solicitacao {
 	
 	@ManyToOne
 	private Usuario usuario;
+	
+	public Solicitacao() {
+		almoxarifados = new ArrayList<Almoxarifado>();
+	}
 	
 	
 	public Long getIdSolicitacao() {
