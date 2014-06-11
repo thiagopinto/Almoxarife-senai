@@ -21,9 +21,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("System_Almoxarifado");
-		EntityManager manager = factory.createEntityManager();
 		
+		EntityManager manager = senai.almoxarife.dao.HibernateManager.getManager();
 		
 		manager.getTransaction().begin();
 		
@@ -37,7 +36,7 @@ public class Main {
 		material.setUnidade("metro");
 		material.setEstoqueMin(5);
 		material.setEstoqueMax(10);
-		material.setDescricao("alta tensão");
+		material.setDescricao("alta tensï¿½o");
 		manager.persist(material);
 		
 		Setor setor = new Setor();
@@ -88,7 +87,7 @@ public class Main {
 		manager.getTransaction().commit();
 		
 		manager.close();
-		factory.close();
+		
 	}
 
 }
