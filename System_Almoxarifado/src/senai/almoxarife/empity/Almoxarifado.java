@@ -12,8 +12,6 @@ public class Almoxarifado {
 	private Long idAlmoxarifado;
 	private String nome;
 	
-	
-
 	public Long getIdAlmoxarifado() {
 		return idAlmoxarifado;
 	}

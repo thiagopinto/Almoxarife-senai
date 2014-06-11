@@ -1,5 +1,6 @@
 package senai.almoxarife.empity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -18,7 +19,10 @@ public class Setor {
 	
 	@OneToMany
 	private Collection<Almoxarifado> almoxerifados;
-		
+	
+	public Setor() {
+		almoxerifados = new ArrayList<Almoxarifado>();
+	}
 	
 	public Long getIdSetor() {
 		return idSetor;
@@ -35,8 +39,8 @@ public class Setor {
 	public Collection<Almoxarifado> getAlmoxerifados() {
 		return almoxerifados;
 	}
-	public void setAlmoxerifados(Almoxarifado almoxerifados) {
-		this.almoxerifados.add(almoxerifados);
+	public void setAlmoxerifados(Almoxarifado almoxerifado) {
+		this.almoxerifados.add(almoxerifado);
 	}
 
 	

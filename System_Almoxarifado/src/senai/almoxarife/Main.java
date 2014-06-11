@@ -1,6 +1,8 @@
 package senai.almoxarife;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,22 +31,26 @@ public class Main {
 		manager.getTransaction().begin();
 		
 		Almoxarifado almoxarifado = new Almoxarifado();
-		almoxarifado.setNome("Almoxarifado Inform·tica");
-		//manager.persist(almoxarifado);
+		almoxarifado.setNome("Almoxarifado Inform√°tica");
 		
-		Material material = new Material();
+		manager.persist(almoxarifado);
+		
+/*		Material material = new Material();
 		material.setNome("Pincel");
 		material.setUnidade("Caixa");
 		material.setEstoqueMin(5);
 		material.setEstoqueMax(10);
 		material.setDescricao("Quandro Branco");
-		manager.persist(material);
+		manager.persist(material);*/
 		
 		Setor setor = new Setor();
+		setor.setNome("ti");
+		//Collection<Almoxarifado> lista = new ArrayList<Almoxarifado>();
+		//lista.add(almoxarifado);
 		setor.setAlmoxerifados(almoxarifado);
 		manager.persist(setor);
 		
-		Usuario user = new Usuario();
+/*		Usuario user = new Usuario();
 		user.setNome("Clesyo Moreira da Silva");
 		user.setMatricula(123923);
 		user.setTelefone("(99)9283-2323");
@@ -52,10 +58,10 @@ public class Main {
 		user.setEmail("clesyo@email.com");
 		user.setSenha("123456");
 		user.getSetores().add(setor);
-		manager.persist(user);
+		manager.persist(user);*/
 		
 		
-		Solicitacao solicitacao = new Solicitacao();
+		/*Solicitacao solicitacao = new Solicitacao();
 		solicitacao.setAlmoxarifados(almoxarifado);
 		solicitacao.setStatusSol("Atendido");
 		solicitacao.setUsuario(user);
@@ -79,7 +85,7 @@ public class Main {
 		inOut.setResponsavel(user);
 		inOut.setTipo(false);
 		inOut.setItens(itemInOut);
-		manager.persist(inOut);
+		manager.persist(inOut);*/
 		
 		manager.getTransaction().commit();
 		
