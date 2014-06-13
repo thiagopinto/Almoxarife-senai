@@ -8,11 +8,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+
+import senai.almoxarife.dao.HibernateManager;
+import senai.almoxarife.empity.Material;
 
 public class CadastroMaterial extends JFrame {
 
@@ -21,12 +27,13 @@ public class CadastroMaterial extends JFrame {
 	private JButton btnGravar;
 	private JButton btnCancelar;
 	private JTextField textMaterial;
-	private JLabel lblUnidade;
-	private JComboBox comboBox;
-	private JLabel lblEstoqueMinimo;
+	
+	private JComboBox comboUnidade;
+	
 	private JTextField textEstoqueMin;
-	private JLabel lblEstoqueMximo;
+	
 	private JTextField textEstoqueMax;
+	private JTextArea textDescricao;
 
 	
 
@@ -35,7 +42,7 @@ public class CadastroMaterial extends JFrame {
 	 */
 	public CadastroMaterial() {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 213);
+		setBounds(100, 100, 450, 308);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -49,6 +56,14 @@ public class CadastroMaterial extends JFrame {
 		btnGravar = new JButton("Gravar");
 		btnGravar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Material material = new Material();
+				material.setNome(textMaterial.getText());
+				material.setEstoqueMin(Integer.parseInt(textEstoqueMin.getText()));
+				material.setEstoqueMax(Integer.parseInt(textEstoqueMax.getText()));
+				material.setUnidade(comboUnidade.getSelectedItem().toString());
+				material.setDescricao(textDescricao.getText());
+				
+				HibernateManager.persistirObject(material);
 			}
 		});
 		panelNorte.add(btnGravar);
@@ -56,6 +71,14 @@ public class CadastroMaterial extends JFrame {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Cancelar cadastro?", "Cancelar",
+						JOptionPane.YES_NO_OPTION);
+				
+				if(confirm != 0){
+					return;
+				}else{
+					dispose();
+				}
 			}
 		});
 		panelNorte.add(btnCancelar);
@@ -71,19 +94,19 @@ public class CadastroMaterial extends JFrame {
 		panel.add(lblMaterial);
 		
 		textMaterial = new JTextField();
-		textMaterial.setBounds(10, 30, 404, 25);
+		textMaterial.setBounds(10, 30, 400, 25);
 		panel.add(textMaterial);
 		textMaterial.setColumns(10);
 		
-		lblUnidade = new JLabel("Unidade:");
+		JLabel lblUnidade = new JLabel("Unidade:");
 		lblUnidade.setBounds(10, 65, 50, 14);
 		panel.add(lblUnidade);
 		
-		comboBox = new JComboBox();
-		comboBox.setBounds(10, 85, 130, 25);
-		panel.add(comboBox);
+		comboUnidade = new JComboBox();
+		comboUnidade.setBounds(10, 85, 130, 25);
+		panel.add(comboUnidade);
 		
-		lblEstoqueMinimo = new JLabel("Estoque Minimo:");
+		JLabel lblEstoqueMinimo = new JLabel("Estoque Minimo:");
 		lblEstoqueMinimo.setBounds(182, 65, 95, 14);
 		panel.add(lblEstoqueMinimo);
 		
@@ -92,7 +115,7 @@ public class CadastroMaterial extends JFrame {
 		panel.add(textEstoqueMin);
 		textEstoqueMin.setColumns(10);
 		
-		lblEstoqueMximo = new JLabel("Estoque M\u00E1ximo:");
+		JLabel lblEstoqueMximo = new JLabel("Estoque M\u00E1ximo:");
 		lblEstoqueMximo.setBounds(300, 65, 100, 14);
 		panel.add(lblEstoqueMximo);
 		
@@ -100,6 +123,16 @@ public class CadastroMaterial extends JFrame {
 		textEstoqueMax.setBounds(300, 85, 86, 25);
 		panel.add(textEstoqueMax);
 		textEstoqueMax.setColumns(10);
+		
+		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o:");
+		lblDescrio.setBounds(10, 121, 58, 15);
+		panel.add(lblDescrio);
+		
+		textDescricao = new JTextArea();
+		textDescricao.setLineWrap(true);
+		JScrollPane scrollPane = new JScrollPane(textDescricao);
+		scrollPane.setBounds(10, 147, 400, 64);
+		panel.add(scrollPane);
 
 	}
 }

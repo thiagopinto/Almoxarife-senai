@@ -17,6 +17,9 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+
+import senai.almoxarife.dao.HibernateManager;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -93,7 +96,7 @@ public class CadastroUser extends JFrame implements ActionListener {
 		lblSetor.setBounds(10, 55, 46, 15);
 		panel.add(lblSetor);
 
-		textSetor = new JComboBox<>();
+		textSetor = new JComboBox(HibernateManager.findObject("select nome from Setor s").toArray());
 		textSetor.setBounds(10, 70, 214, 25);
 		panel.add(textSetor);
 

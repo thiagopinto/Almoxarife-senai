@@ -3,8 +3,6 @@ package senai.almoxarife;
 
 import java.util.Calendar;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import senai.almoxarife.empity.Almoxarifado;
 import senai.almoxarife.empity.EntradaSaida;
 import senai.almoxarife.empity.ItemEntradaSaida;
@@ -13,6 +11,7 @@ import senai.almoxarife.empity.Setor;
 import senai.almoxarife.empity.Solicitacao;
 import senai.almoxarife.empity.SolicitacaoMaterial;
 import senai.almoxarife.empity.Usuario;
+import senai.almoxarife.view.TelaInicioForm;
 
 
 public class Main {
@@ -21,7 +20,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		/*
 		EntityManager manager = senai.almoxarife.dao.HibernateManager.getManager();
 		
 		manager.getTransaction().begin();
@@ -36,7 +35,7 @@ public class Main {
 		material.setUnidade("metro");
 		material.setEstoqueMin(5);
 		material.setEstoqueMax(10);
-		material.setDescricao("alta tensï¿½o");
+		material.setDescricao("alta tensão");
 		manager.persist(material);
 		
 		Setor setor = new Setor();
@@ -87,7 +86,9 @@ public class Main {
 		manager.getTransaction().commit();
 		
 		manager.close();
+		*/
 		
+		new TelaInicioForm().setVisible(true);
 	}
 
 }
