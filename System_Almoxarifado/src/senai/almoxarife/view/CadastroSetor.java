@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -12,6 +13,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import senai.almoxarife.dao.HibernateManager;
+import senai.almoxarife.empity.Setor;
 
 public class CadastroSetor extends JFrame {
 
@@ -40,6 +44,20 @@ public class CadastroSetor extends JFrame {
 		btnGravar = new JButton("Gravar");
 		btnGravar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			Setor setor = new Setor();
+			setor.setNome(textSetor.getText());
+			
+			HibernateManager.persistirObject(setor);
+			int confirm = JOptionPane.showConfirmDialog(null, "Deseja efetuar um novo cadastro?", "Novo Cadastro",
+					JOptionPane.YES_NO_OPTION);
+			
+			if(confirm != 0){
+				dispose();
+			}else{
+				
+				textSetor.setText("");
+				return;
+			}
 			}
 		});
 		panelNorte.add(btnGravar);
@@ -47,6 +65,14 @@ public class CadastroSetor extends JFrame {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Cancelar cadastro?", "Cancelar",
+						JOptionPane.YES_NO_OPTION);
+				
+				if(confirm != 0){
+					return;
+				}else{
+					dispose();
+				}
 			}
 		});
 		panelNorte.add(btnCancelar);

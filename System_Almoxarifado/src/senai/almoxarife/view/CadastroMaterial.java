@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 
 import senai.almoxarife.dao.HibernateManager;
 import senai.almoxarife.empity.Material;
+import javax.swing.DefaultComboBoxModel;
 
 public class CadastroMaterial extends JFrame {
 
@@ -64,6 +65,21 @@ public class CadastroMaterial extends JFrame {
 				material.setDescricao(textDescricao.getText());
 				
 				HibernateManager.persistirObject(material);
+				
+				int confirm = JOptionPane.showConfirmDialog(null, "Deseja efetuar um novo cadastro?", "Novo Cadastro",
+						JOptionPane.YES_NO_OPTION);
+				
+				if(confirm != 0){
+					dispose();
+				}else{
+					
+					textMaterial.setText("");
+					textEstoqueMax.setText("");
+					textEstoqueMin.setText("");
+					comboUnidade.setSelectedItem("");
+					textDescricao.setText("");
+					return;
+				}
 			}
 		});
 		panelNorte.add(btnGravar);
@@ -103,6 +119,8 @@ public class CadastroMaterial extends JFrame {
 		panel.add(lblUnidade);
 		
 		comboUnidade = new JComboBox();
+		comboUnidade.setModel(new DefaultComboBoxModel(
+				new String[] {"", "Caixa", "Kg", "Litro", "Metro", "Unidade"}));
 		comboUnidade.setBounds(10, 85, 130, 25);
 		panel.add(comboUnidade);
 		

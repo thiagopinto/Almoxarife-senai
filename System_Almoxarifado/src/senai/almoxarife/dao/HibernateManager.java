@@ -31,10 +31,10 @@ public class HibernateManager {
 		manager.getTransaction().begin();
 		manager.persist(object);
 		manager.getTransaction().commit();
-		manager.close();
+//		manager.close();
 	}
 
-	public static <T> List<T> findObject(String value){
+	public static <T> List<T> findAllObject(String value){
 		EntityManager manager = HibernateManager.getManager();
 
 		manager.getTransaction().begin();
@@ -43,8 +43,22 @@ public class HibernateManager {
 		List<T> retorno = query.getResultList();
 		
 		manager.getTransaction().commit();
-		manager.close();
+//		manager.close();
 		
+		return retorno;
+		
+	}
+	
+	public <T> T findObject(Class<T> klass, Object objectId){
+		
+		EntityManager manager = HibernateManager.getManager();
+		
+		manager.getTransaction().begin();
+		
+		T retorno = manager.find(klass, objectId);
+		
+		manager.getTransaction().commit();
+//		manager.close();
 		return retorno;
 		
 	}

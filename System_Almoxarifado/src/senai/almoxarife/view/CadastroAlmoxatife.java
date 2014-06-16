@@ -54,6 +54,16 @@ public class CadastroAlmoxatife extends JFrame {
 				almoxarifado.setNome(textAlmoxarife.getText());
 				
 				HibernateManager.persistirObject(almoxarifado);
+				
+				int confirm = JOptionPane.showConfirmDialog(null, "Deseja efetuar um novo cadastro?", "Novo Cadastro",
+						JOptionPane.YES_NO_OPTION);
+				
+				if(confirm != 0){
+					textAlmoxarife.setText("");
+					return;
+				}else{
+					dispose();
+				}
 			}
 		});
 		panelNorte.add(btnGravar);
