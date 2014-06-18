@@ -13,12 +13,15 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 import senai.almoxarife.dao.HibernateManager;
 import senai.almoxarife.empity.Almoxarifado;
+import senai.almoxarife.empity.Setor;
 
 public class CadastroAlmoxatife extends JFrame {
 
@@ -26,6 +29,7 @@ public class CadastroAlmoxatife extends JFrame {
 	private JTextField textAlmoxarife;
 	private JButton btnGravar;
 	private JButton btnCancelar;
+	private JComboBox comboSetor;
 
 
 	/**
@@ -50,8 +54,14 @@ public class CadastroAlmoxatife extends JFrame {
 		btnGravar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				List<Long> idSetor = HibernateManager.findAllObject("select s.idSetor from Setor s where nome = '"+
+						comboSetor.getSelectedItem()+"'");
+				
 				Almoxarifado almoxarifado = new Almoxarifado();
 				almoxarifado.setNome(textAlmoxarife.getText());
+				
+				Setor setor = HibernateManager.findObject(Setor.class, idSetor.get(0));
+				setor.setAlmoxerifados(almoxarifado);
 				
 				HibernateManager.persistirObject(almoxarifado);
 				
@@ -93,12 +103,20 @@ public class CadastroAlmoxatife extends JFrame {
 		panelCenter.setLayout(null);
 		
 		JLabel lblAlmoxarifado = new JLabel("Almoxarifado:");
-		lblAlmoxarifado.setBounds(111, 11, 84, 14);
+		lblAlmoxarifado.setBounds(10, 11, 84, 14);
 		panelCenter.add(lblAlmoxarifado);
 		
 		textAlmoxarife = new JTextField();
-		textAlmoxarife.setBounds(111, 31, 219, 25);
+		textAlmoxarife.setBounds(10, 31, 219, 25);
 		panelCenter.add(textAlmoxarife);
 		textAlmoxarife.setColumns(10);
+		
+		JLabel lblSetor = new JLabel("Setor:");
+		lblSetor.setBounds(254, 11, 46, 14);
+		panelCenter.add(lblSetor);
+		
+		comboSetor = new JComboBox(HibernateManager.findAllObject("select s from Setor s").toArray());
+		comboSetor.setBounds(254, 31, 131, 25);
+		panelCenter.add(comboSetor);
 	}
 }

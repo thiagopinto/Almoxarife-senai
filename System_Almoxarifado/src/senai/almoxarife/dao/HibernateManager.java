@@ -49,7 +49,7 @@ public class HibernateManager {
 		
 	}
 	
-	public <T> T findObject(Class<T> klass, Object objectId){
+	public static <T> T findObject(Class<T> klass, Object objectId){
 		
 		EntityManager manager = HibernateManager.getManager();
 		
