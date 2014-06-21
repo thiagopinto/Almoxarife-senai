@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import senai.almoxarife.tableModel.SolicitacaoTabelMode;
 import senai.almoxarife.dao.HibernateManager;
 import senai.almoxarife.empity.Material;
+import senai.almoxarife.empity.Usuario;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -57,27 +58,16 @@ public class SolicitacaoView extends JFrame {
 
 	private List<Material> listMateriais,
 			lisMaterialSolicitado = new ArrayList<Material>();
+	
+	private Usuario usuario;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SolicitacaoView frame = new SolicitacaoView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public SolicitacaoView() {
+	public SolicitacaoView(Usuario usuario) {
+		this.usuario = usuario;
 		// CARACTERISTICAS DA JANELA....
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 662);
@@ -89,12 +79,12 @@ public class SolicitacaoView extends JFrame {
 
 		/*
 		 * instanciando painel esquerdo:com tabela materiais em estoque,com
-		 * campo para indicar materia a ser pesquisado,com botão para confirmar
+		 * campo para indicar materia a ser pesquisado,com botï¿½o para confirmar
 		 * pesquisa,com lista de setores,com botao para atualizar tabela de
-		 * mareteriais em estoque,com painel que organizara campos e botões para
+		 * mareteriais em estoque,com painel que organizara campos e botï¿½es para
 		 * incluir material na tabela de materiais a serem solicitados,com campo
 		 * para indicar a quantidade do material a ser incluido na tabela de
-		 * materiais a serem solicitados,com botão para confirmar inclusão de
+		 * materiais a serem solicitados,com botï¿½o para confirmar inclusï¿½o de
 		 * material na tabela de materiais a serem solicitados.
 		 */
 		panelEsquerdo = new JPanel();
@@ -117,7 +107,7 @@ public class SolicitacaoView extends JFrame {
 		// ADD AO PAINEL ESQUERDO
 		panelEsquerdo.add(textPesquisaMaterial);
 
-		// BOTÕES(PESQUISAR, ATUALIZAR TABELA).
+		// BOTï¿½ES(PESQUISAR, ATUALIZAR TABELA).
 		btnPesquisa = new JButton("Buscar");
 		btnPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -144,8 +134,8 @@ public class SolicitacaoView extends JFrame {
 		/*
 		 * Painel de funcionalidades ao inserir materiais: com label indicando
 		 * "quantidade", com campo para quantidade de material a ser inserido na
-		 * tabela de materiais a serem solicitados, com botão para confirmar
-		 * inclusão de material na tabela de materiais solicitados
+		 * tabela de materiais a serem solicitados, com botï¿½o para confirmar
+		 * inclusï¿½o de material na tabela de materiais solicitados
 		 */
 		panelInserirMateriais = new JPanel();
 		panelInserirMateriais.setBorder(new TitledBorder(null, "",
@@ -167,7 +157,7 @@ public class SolicitacaoView extends JFrame {
 		// ADD AO PAINEL DE INSERIR MATERIAIS.
 		panelInserirMateriais.add(textQnt);
 
-		// BOTÃO(CONFIRMA INSERÇÃO DE MATERIAL À TABELA DE MATERIAIS A SEREM
+		// BOTï¿½O(CONFIRMA INSERï¿½ï¿½O DE MATERIAL ï¿½ TABELA DE MATERIAIS A SEREM
 		// SOLICITADOS).
 		btnInserir = new JButton("Incluir");
 		btnInserir.addActionListener(new ActionListener() {
@@ -183,9 +173,9 @@ public class SolicitacaoView extends JFrame {
 		panelEsquerdo.add(panelInserirMateriais);
 
 		/*
-		 * Instanciando painel direito:com tabela de materiais que estão sendo
+		 * Instanciando painel direito:com tabela de materiais que estï¿½o sendo
 		 * solicitados,com label indicando "data",com campo para data da
-		 * solicitação,com botões para confirmar e cancelar solicitação.
+		 * solicitaï¿½ï¿½o,com botï¿½es para confirmar e cancelar solicitaï¿½ï¿½o.
 		 */
 		panelDireito = new JPanel();
 		panelDireito.setBorder(new TitledBorder(null,
@@ -204,7 +194,7 @@ public class SolicitacaoView extends JFrame {
 		panelDireito.add(scrollPaneTableMateriaisSolicitados);
 
 		// CAMPO(ONDE SERA INSERIDA A DATA EM QUE ESTARA SENDO FEITA A
-		// SOLICITAÇÃO).
+		// SOLICITAï¿½ï¿½O).
 		textData = new JTextField();
 		textData.setBounds(10, 248, 112, 25);
 		// ADD AO PAINEL DIREITO.
@@ -217,7 +207,7 @@ public class SolicitacaoView extends JFrame {
 		// ADD AO PAINEL DIREITO.
 		panelDireito.add(lblData);
 
-		// BOTÕES(CONFIRMAR E CANCELAR)
+		// BOTï¿½ES(CONFIRMAR E CANCELAR)
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

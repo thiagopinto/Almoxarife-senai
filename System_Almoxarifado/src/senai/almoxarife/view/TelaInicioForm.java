@@ -18,21 +18,22 @@ import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import senai.almoxarife.empity.Usuario;
+
 public class TelaInicioForm extends JFrame {
 
 	private JPanel contentPane;
-	private JMenuItem itemUsuario;
-	private JMenuItem itemMaterial;
-	private JMenuItem itemSetor;
-	private JMenuItem itemAlmoxarifado;
-	private JMenuItem itemListUsurios;
+	private JMenuItem itemUsuario, itemMaterial,itemSetor, 
+			itemAlmoxarifado, itemListUsurios, itemSolicitarMaterial;
+	
+	private Usuario user;
 
 	
 	/**
 	 * Create the frame.
 	 */
-	public TelaInicioForm() {
-
+	public TelaInicioForm(Usuario usuario) {
+		this.user = usuario;
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension d = tk.getScreenSize();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,16 +95,32 @@ public class TelaInicioForm extends JFrame {
 		});
 		menuCadastro.add(itemUsuario);
 		
+		
+		/*-----------------||Menu Solicitação||-------------------*/
+		JMenu menuSolicitao = new JMenu("Solicitação");
+		menuBarMain.add(menuSolicitao);
+		
+		itemSolicitarMaterial = new JMenuItem("Solicitar Material");
+		itemSolicitarMaterial.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new SolicitacaoView(user).setVisible(true);
+			}
+		});
+		menuSolicitao.add(itemSolicitarMaterial);
+		
 		/*-----------------||Menu Listagem||-------------------*/
-		JMenu mnListagem = new JMenu("Listagem");
-		menuBarMain.add(mnListagem);
+		JMenu menuListagem = new JMenu("Listagem");
+		menuBarMain.add(menuListagem);
 		
 		itemListUsurios = new JMenuItem("Usu\u00E1rios");
-		mnListagem.add(itemListUsurios);
+		menuListagem.add(itemListUsurios);
 		
 		/*-----------------||Menu de Relatorio||-------------------*/
-		JMenu mnRelatrio = new JMenu("Relat\u00F3rio");
-		menuBarMain.add(mnRelatrio);
+		JMenu menuRelatrio = new JMenu("Relat\u00F3rio");
+		menuBarMain.add(menuRelatrio);
 
 	}
 	

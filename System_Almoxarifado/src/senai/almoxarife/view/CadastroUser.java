@@ -70,18 +70,19 @@ public class CadastroUser extends JFrame implements ActionListener {
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Cancelar cadastro?", "Cancelar",
+				int confirm = JOptionPane.showConfirmDialog(null,
+						"Cancelar cadastro?", "Cancelar",
 						JOptionPane.YES_NO_OPTION);
-				
-				if(confirm != 0){
+
+				if (confirm != 0) {
 					return;
-				}else{
+				} else {
 					dispose();
 				}
-				
+
 			}
 		});
 		panelNorte.add(btnCancelar);
@@ -114,7 +115,8 @@ public class CadastroUser extends JFrame implements ActionListener {
 		lblSetor.setBounds(10, 55, 46, 15);
 		panel.add(lblSetor);
 
-		textSetor = new JComboBox(HibernateManager.findAllObject("select nome from Setor s").toArray());
+		textSetor = new JComboBox(HibernateManager.findAllObject(
+				"select nome from Setor s").toArray());
 		textSetor.setBounds(10, 70, 214, 25);
 		panel.add(textSetor);
 
@@ -163,7 +165,7 @@ public class CadastroUser extends JFrame implements ActionListener {
 		grupoRadio.add(itemSimples);
 		grupoRadio.add(itemAdministrador);
 		/*-----------------||Grupo de RadiosButtons||-------------------*/
-		
+
 	}
 
 	/*------------||Tratamento dos RadiosButtons||-------------*
@@ -172,34 +174,37 @@ public class CadastroUser extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (itemSimples.isSelected()) {
 			nivelUser = USER_SIMPLES;
-			//System.out.println(USER_SIMPLES);
+			// System.out.println(USER_SIMPLES);
 		} else if (itemAdministrador.isSelected()) {
 			nivelUser = USER_ADM;
-			//System.out.println(USER_ADM);
+			// System.out.println(USER_ADM);
 		}
 
 	}
-	
-	private void onSalvar(){
-		Setor setor = (Setor) HibernateManager.findAllObject("select s from Setor s where nome = '"+textSetor.getSelectedItem()+"'").get(0);
-		Usuario usuario = new  Usuario();
+
+	private void onSalvar() {
+		Setor setor = (Setor) HibernateManager.findAllObject(
+				"select s from Setor s where nome = '"
+						+ textSetor.getSelectedItem() + "'").get(0);
+		Usuario usuario = new Usuario();
 		usuario.setNome(textNome.getText());
 		usuario.setMatricula(Integer.parseInt(textMatricula.getText()));
 		usuario.setEmail(textEmail.getText());
 		usuario.setTelefone(textTelefon.getText());
 		usuario.setNivel(nivelUser);
 		usuario.setSenha(textSenha.getText());
-		usuario.getSetores().add(setor);
-		
+		usuario.setSetor(setor);
+
 		HibernateManager.persistirObject(usuario);
-		
-		int confirm = JOptionPane.showConfirmDialog(null, "Deseja efetuar um novo cadastro?", "Novo Cadastro",
+
+		int confirm = JOptionPane.showConfirmDialog(null,
+				"Deseja efetuar um novo cadastro?", "Novo Cadastro",
 				JOptionPane.YES_NO_OPTION);
-		
-		if(confirm != 0){
+
+		if (confirm != 0) {
 			dispose();
-		}else{
-			
+		} else {
+
 			textNome.setText("");
 			textMatricula.setText("");
 			textEmail.setText("");
@@ -208,10 +213,9 @@ public class CadastroUser extends JFrame implements ActionListener {
 			textSenha.setText("");
 			textSetor.setSelectedItem("");
 			return;
-			
+
 		}
-		
+
 	}
-	
-	
+
 }

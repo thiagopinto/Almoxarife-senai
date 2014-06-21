@@ -11,6 +11,7 @@ import senai.almoxarife.empity.Setor;
 import senai.almoxarife.empity.Solicitacao;
 import senai.almoxarife.empity.SolicitacaoMaterial;
 import senai.almoxarife.empity.Usuario;
+import senai.almoxarife.view.LoginView;
 import senai.almoxarife.view.TelaInicioForm;
 
 
@@ -35,7 +36,7 @@ public class Main {
 		material.setUnidade("metro");
 		material.setEstoqueMin(5);
 		material.setEstoqueMax(10);
-		material.setDescricao("alta tensão");
+		material.setDescricao("alta tensï¿½o");
 		manager.persist(material);
 		
 		Setor setor = new Setor();
@@ -88,7 +89,7 @@ public class Main {
 		manager.close();
 		*/
 		
-		new TelaInicioForm().setVisible(true);
+		new LoginView().setVisible(true);
 	}
 
 }

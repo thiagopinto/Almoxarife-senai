@@ -49,7 +49,7 @@ public class CadastroAlmoxatife extends JFrame {
 		panelNorte.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		
-		/*-----------//Botões gravar e cancelar\\-------------*/
+		/*-----------//Botï¿½es gravar e cancelar\\-------------*/
 		btnGravar = new JButton("Gravar");
 		btnGravar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -93,7 +93,7 @@ public class CadastroAlmoxatife extends JFrame {
 			}
 		});
 		panelNorte.add(btnCancelar);
-		/*-----------//Botões\\-------------*/
+		/*-----------//Botï¿½es\\-------------*/
 		
 		
 		/*-----------//painel center\\-------------*/
@@ -115,8 +115,11 @@ public class CadastroAlmoxatife extends JFrame {
 		lblSetor.setBounds(254, 11, 46, 14);
 		panelCenter.add(lblSetor);
 		
-		comboSetor = new JComboBox(HibernateManager.findAllObject("select s from Setor s").toArray());
+		comboSetor = new JComboBox(HibernateManager.findAllObject("select s.nome from Setor s").toArray());
 		comboSetor.setBounds(254, 31, 131, 25);
 		panelCenter.add(comboSetor);
+	}
+	public static void main(String[] args) {
+		new CadastroAlmoxatife().setVisible(true);
 	}
 }

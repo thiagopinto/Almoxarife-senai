@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,14 +22,10 @@ public class Usuario {
 	private String senha;
 	private int nivel;
 	
-	@OneToMany
-	private Collection<Setor> setores;
+	@ManyToOne
+	private Setor setor;
 	
-	public Usuario() {
-		setores = new ArrayList<Setor>();
-	}
-	
-	
+		
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
@@ -71,12 +68,13 @@ public class Usuario {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
-	public Collection<Setor> getSetores() {
-		return setores;
+	public Setor getSetor() {
+		return setor;
 	}
-	public void setSetores(Collection<Setor> setores) {
-		this.setores = setores;
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
+	
 
 	
 
