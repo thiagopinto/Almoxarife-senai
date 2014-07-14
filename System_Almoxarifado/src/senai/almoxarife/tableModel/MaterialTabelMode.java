@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import senai.almoxarife.dao.HibernateManager;
 import senai.almoxarife.empity.Material;
 
-public class SolicitacaoTabelMode extends AbstractTableModel {
+public class MaterialTabelMode extends AbstractTableModel {
 	
 	private static final int COL_ID = 0;
 	private static final int COL_NOME = 1;
@@ -19,7 +19,7 @@ public class SolicitacaoTabelMode extends AbstractTableModel {
 	
 	List<Material> material;
 	
-	public SolicitacaoTabelMode(List<Material> material) {
+	public MaterialTabelMode(List<Material> material) {
 		this.material = material;
 	}
 
@@ -75,7 +75,7 @@ public class SolicitacaoTabelMode extends AbstractTableModel {
 			coluna = "Estoque Maximo";
 			break;
 		case COL_DESC:
-			coluna = "Descrição";
+			coluna = "DescriÃ§Ã£o";
 			break;
 
 		default:

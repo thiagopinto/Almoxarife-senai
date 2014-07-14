@@ -1,8 +1,11 @@
 package senai.almoxarife.empity;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Almoxarifado {
@@ -11,6 +14,9 @@ public class Almoxarifado {
 	@GeneratedValue
 	private Long idAlmoxarifado;
 	private String nome;
+	
+	@ManyToMany
+	private Collection<Material> materiais;
 	
 	public Long getIdAlmoxarifado() {
 		return idAlmoxarifado;
@@ -24,5 +30,12 @@ public class Almoxarifado {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public Collection<Material> getMateriais() {
+		return materiais;
+	}
+	public void setMateriais(Collection<Material> materiais) {
+		this.materiais = materiais;
+	}
+	
 
 }

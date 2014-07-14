@@ -54,14 +54,16 @@ public class Solicitacao {
 	}
 	public void setStatusSol(String statusSol) {
 		this.statusSol = statusSol;
-	}
+	}	
 	
 	public Collection<Almoxarifado> getAlmoxarifados() {
 		return almoxarifados;
 	}
-	public void setAlmoxarifados(Almoxarifado almoxarifados) {
-		this.almoxarifados.add(almoxarifados);
+
+	public void setAlmoxarifados(Collection<Almoxarifado> almoxarifados) {
+		this.almoxarifados = almoxarifados;
 	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

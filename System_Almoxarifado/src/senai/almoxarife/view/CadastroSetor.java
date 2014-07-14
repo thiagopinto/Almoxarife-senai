@@ -6,10 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -23,6 +26,8 @@ public class CadastroSetor extends JFrame {
 	private JButton btnGravar;
 	private JButton btnCancelar;
 	private JTextField textSetor;
+	private JTable tabelaSetor;
+	private List<Setor> listSetor;
 
 
 	/**

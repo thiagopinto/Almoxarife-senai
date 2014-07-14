@@ -25,15 +25,21 @@ import javax.swing.JComboBox;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
 
-import senai.almoxarife.tableModel.SolicitacaoTabelMode;
+import senai.almoxarife.tableModel.MaterialTabelMode;
 import senai.almoxarife.dao.HibernateManager;
+import senai.almoxarife.empity.Almoxarifado;
 import senai.almoxarife.empity.Material;
+import senai.almoxarife.empity.Solicitacao;
+import senai.almoxarife.empity.SolicitacaoMaterial;
 import senai.almoxarife.empity.Usuario;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SolicitacaoView extends JFrame {
@@ -56,12 +62,11 @@ public class SolicitacaoView extends JFrame {
 
 	private JComboBox comboBoxSetores;
 
-	private List<Material> listMateriais,
-			lisMaterialSolicitado = new ArrayList<Material>();
-	
-	private Usuario usuario;
+	private List<Material> listMateriais;
+	private List<Material> lisMaterialSolicitado = new ArrayList<Material>();
+	private List<Almoxarifado> listaAlmoxarifado = new ArrayList<Almoxarifado>();
 
-	
+	private Usuario usuario;
 
 	/**
 	 * Create the frame.
@@ -127,6 +132,20 @@ public class SolicitacaoView extends JFrame {
 		// COMBOBOX(LISTA DE SETORES).
 		comboBoxSetores = new JComboBox(HibernateManager.findAllObject(
 				"select a.nome from Almoxarifado a").toArray());
+		comboBoxSetores.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println(comboBoxSetores.getSelectedItem());
+//					HibernateManager
+//							.findAllObject("select a from Almoxarifado a nome = '"
+//									+ comboBoxSetores.getSelectedItem() + "'");
+					
+				}
+			}
+		});
 		comboBoxSetores.setBounds(314, 29, 218, 25);
 		// ADD AO PAINEL ESQUERDO
 		panelEsquerdo.add(comboBoxSetores);
@@ -159,7 +178,7 @@ public class SolicitacaoView extends JFrame {
 
 		// BOT�O(CONFIRMA INSER��O DE MATERIAL � TABELA DE MATERIAIS A SEREM
 		// SOLICITADOS).
-		btnInserir = new JButton("Incluir");
+		btnInserir =  new JButton("Incluir");
 		btnInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				incluirMaterialSolicitacao();
@@ -240,7 +259,7 @@ public class SolicitacaoView extends JFrame {
 					lisMaterialSolicitado.remove(tblMateriaisSolicitados
 							.getSelectedRow());
 
-					tblMateriaisSolicitados.setModel(new SolicitacaoTabelMode(
+					tblMateriaisSolicitados.setModel(new MaterialTabelMode(
 							lisMaterialSolicitado));
 				}
 
@@ -270,7 +289,7 @@ public class SolicitacaoView extends JFrame {
 		listMateriais = HibernateManager
 				.findAllObject("select m from Material m");
 		if (listMateriais != null) {
-			tblMateriais.setModel(new SolicitacaoTabelMode(listMateriais));
+			tblMateriais.setModel(new MaterialTabelMode(listMateriais));
 		}
 	}
 
@@ -282,12 +301,28 @@ public class SolicitacaoView extends JFrame {
 			return;
 		}
 		// List<Material> lisMat = new ArrayList<>();
-		Material material = new SolicitacaoTabelMode(listMateriais).get(row);
+		Material material = new MaterialTabelMode(listMateriais).get(row);
 		lisMaterialSolicitado.add(material);
 
 		if (lisMaterialSolicitado != null) {
-			tblMateriaisSolicitados.setModel(new SolicitacaoTabelMode(
+			tblMateriaisSolicitados.setModel(new MaterialTabelMode(
 					lisMaterialSolicitado));
 		}
+	}
+
+	public void realzarSolicitacao() {
+		Solicitacao solicitacao = new Solicitacao();
+		solicitacao.setDataSoli(Calendar.getInstance());
+		solicitacao.setUsuario(usuario);
+
+		SolicitacaoMaterial sMaterial = new SolicitacaoMaterial();
+		sMaterial.setMateriais(lisMaterialSolicitado);
+		sMaterial.setQuantidade(Integer.parseInt(textQnt.getText()));
+		sMaterial.setSolicitacao(solicitacao);
+
+	}
+
+	public static void main(String[] args) {
+		new SolicitacaoView(new Usuario()).setVisible(true);
 	}
 }

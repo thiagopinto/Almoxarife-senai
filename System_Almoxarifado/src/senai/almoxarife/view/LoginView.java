@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
@@ -82,7 +83,7 @@ public class LoginView extends JFrame {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				textUser.setText("");
 				textSenha.setText("");
 			}
@@ -97,10 +98,14 @@ public class LoginView extends JFrame {
 				Usuario usuario = Logar(Integer.parseInt(textUser.getText()),
 						textSenha.getText());
 
-				System.out.println("Nome: " + usuario.getNome());
-				System.out.println("Matricula: " + usuario.getMatricula());
-				System.out.println("Senha:" + usuario.getSenha());
-				System.out.println("Nivel: " + usuario.getNivel());
+				if (usuario != null) {
+					
+					new TelaInicioForm(usuario).setVisible(true);
+					dispose();
+					
+				} else {
+					System.out.println("Usuario nao existe!!!");
+				}
 			}
 		});
 		btnEntrar.setBounds(144, 138, 89, 23);
@@ -108,9 +113,16 @@ public class LoginView extends JFrame {
 	}
 
 	private Usuario Logar(Integer matricula, String senha) {
-		Usuario usuario = (Usuario) HibernateManager.findAllObject(
-				"select u from Usuario u where u.matricula = " + matricula
-						+ "and u.senha = '" + senha + "'").get(0);
+		Usuario usuario = null;
+		try {
+			usuario = (Usuario) HibernateManager.findAllObject(
+					"select u from Usuario u where u.matricula = " + matricula
+							+ "and u.senha = '" + senha + "'").get(0);
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Usuario ou senha invalida");
+			return null;
+		}
 
 		return usuario;
 

@@ -11,10 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
 import java.awt.Color;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -22,34 +25,38 @@ import javax.swing.JRadioButton;
 import senai.almoxarife.dao.HibernateManager;
 import senai.almoxarife.empity.Setor;
 import senai.almoxarife.empity.Usuario;
+import senai.almoxarife.tableModel.UsuarioTableModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
+import javax.swing.JScrollPane;
 
 public class CadastroUser extends JFrame implements ActionListener {
 
 	private static final int USER_ADM = 1;
 	private static final int USER_SIMPLES = 2;
 	private JPanel contentPane;
-	private JTextField textNome;
-	private JTextField textMatricula;
+
+	private JTextField textNome, textMatricula, textTelefon, textEmail,
+			textSenha;
+
 	private JComboBox textSetor;
-	private JTextField textTelefon;
-	private JTextField textEmail;
-	private JTextField textSenha;
-	private JRadioButton itemSimples;
-	private JRadioButton itemAdministrador;
-	private JButton btnGravar;
-	private JButton btnCancelar;
+	private JRadioButton itemSimples, itemAdministrador;
+	private JButton btnGravar, btnCancelar;
+	private JTable tabelaUser;
 	private int nivelUser;
+
+	private List<Usuario> listUsuario;
 
 	/**
 	 * Create the frame.
 	 */
 	public CadastroUser() {
-		super("Cadastro de Usu·rio");
+		super("Cadastro de Usu√°rio");
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 281);
+		setBounds(100, 100, 450, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 1));
@@ -86,85 +93,96 @@ public class CadastroUser extends JFrame implements ActionListener {
 			}
 		});
 		panelNorte.add(btnCancelar);
-		/*-----------------||Buttons||-------------------*/
 
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		JPanel panelDados = new JPanel();
+		panelDados.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		contentPane.add(panelDados, BorderLayout.CENTER);
+		panelDados.setLayout(null);
 
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setBounds(10, 10, 46, 15);
-		panel.add(lblNome);
+		panelDados.add(lblNome);
 
 		textNome = new JTextField();
 		textNome.setBounds(10, 25, 255, 25);
-		panel.add(textNome);
+		panelDados.add(textNome);
 		textNome.setColumns(100);
 
 		JLabel lblMatricula = new JLabel("Matricula:");
 		lblMatricula.setBounds(275, 11, 61, 15);
-		panel.add(lblMatricula);
+		panelDados.add(lblMatricula);
 
 		textMatricula = new JTextField();
 		textMatricula.setBounds(275, 25, 86, 25);
-		panel.add(textMatricula);
+		panelDados.add(textMatricula);
 		textMatricula.setColumns(10);
 
 		JLabel lblSetor = new JLabel("Setor:");
 		lblSetor.setBounds(10, 55, 46, 15);
-		panel.add(lblSetor);
+		panelDados.add(lblSetor);
 
 		textSetor = new JComboBox(HibernateManager.findAllObject(
 				"select nome from Setor s").toArray());
 		textSetor.setBounds(10, 70, 214, 25);
-		panel.add(textSetor);
+		panelDados.add(textSetor);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setBounds(275, 55, 61, 15);
-		panel.add(lblTelefone);
+		panelDados.add(lblTelefone);
 
 		textTelefon = new JTextField();
 		textTelefon.setBounds(275, 70, 111, 25);
-		panel.add(textTelefon);
+		panelDados.add(textTelefon);
 		textTelefon.setColumns(10);
 
 		JLabel lblEmail = new JLabel("E-mail:");
 		lblEmail.setBounds(10, 100, 46, 14);
-		panel.add(lblEmail);
+		panelDados.add(lblEmail);
 
 		textEmail = new JTextField();
 		textEmail.setBounds(10, 115, 255, 25);
-		panel.add(textEmail);
+		panelDados.add(textEmail);
 		textEmail.setColumns(10);
 
 		JLabel lblSenha = new JLabel("Senha:");
 		lblSenha.setBounds(275, 100, 46, 15);
-		panel.add(lblSenha);
+		panelDados.add(lblSenha);
 
 		textSenha = new JPasswordField();
 		textSenha.setBounds(275, 115, 111, 25);
-		panel.add(textSenha);
+		panelDados.add(textSenha);
 
 		JLabel lblNivel = new JLabel("Nivel:");
 		lblNivel.setBounds(10, 145, 34, 15);
-		panel.add(lblNivel);
+		panelDados.add(lblNivel);
 
 		/*-----------------||Grupo de RadiosButtons||-------------------*/
 		ButtonGroup grupoRadio = new ButtonGroup();
 		itemSimples = new JRadioButton("Simples");
 		itemSimples.addActionListener(this);
 		itemSimples.setBounds(10, 160, 71, 23);
-		panel.add(itemSimples);
+		panelDados.add(itemSimples);
 
 		itemAdministrador = new JRadioButton("Administrador");
 		itemAdministrador.addActionListener(this);
 		itemAdministrador.setBounds(83, 160, 110, 23);
-		panel.add(itemAdministrador);
+		panelDados.add(itemAdministrador);
 
 		grupoRadio.add(itemSimples);
 		grupoRadio.add(itemAdministrador);
 		/*-----------------||Grupo de RadiosButtons||-------------------*/
+
+		JPanel panelTable = new JPanel();
+		panelTable.setBorder(new TitledBorder("Lista de Usu\u00E1rio"));
+		panelTable.setBounds(10, 200, 404, 195);
+		panelDados.add(panelTable);
+		panelTable.setLayout(new BorderLayout(0, 0));
+
+		tabelaUser = new JTable();
+		JScrollPane scrollTabela = new JScrollPane(tabelaUser);
+		panelTable.add(scrollTabela);
+
+		refreshTable();
 
 	}
 
@@ -218,4 +236,14 @@ public class CadastroUser extends JFrame implements ActionListener {
 
 	}
 
+	private void refreshTable() {
+		listUsuario = HibernateManager.findAllObject("select u from Usuario u");
+		if (listUsuario != null) {
+			tabelaUser.setModel(new UsuarioTableModel(listUsuario));
+		}
+	}
+
+	public static void main(String[] args) {
+		new CadastroUser().setVisible(true);
+	}
 }
