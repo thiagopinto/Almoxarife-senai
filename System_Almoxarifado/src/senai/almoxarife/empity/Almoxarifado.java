@@ -28,6 +28,7 @@ public class Almoxarifado {
 		return nome;
 	}
 	public void setNome(String nome) {
+		
 		this.nome = nome;
 	}
 	public Collection<Material> getMateriais() {
